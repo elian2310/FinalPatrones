@@ -7,6 +7,8 @@ namespace PFPatrones
     {
         static void Main(string[] args)
         {
+            Fachada fachada = new Fachada();
+
             List<int> muebles = new List<int>();
             List<int> cocina = new List<int>();
             List<int> habitacion = new List<int>();
