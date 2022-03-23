@@ -9,6 +9,7 @@ namespace PFPatrones
         public string User { get; set; }
         public string Pass { get; set; }
         public List<Producto> carrito { get; set; }
+        CareTaker saves;
 
         public Usuario(string usr, string psw)
         {
