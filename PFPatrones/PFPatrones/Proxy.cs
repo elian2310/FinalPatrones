@@ -6,21 +6,18 @@ namespace PFPatrones
 {
     class Proxy: IProxy
     {
-       private Usuario user;
+        public Usuario user;
         public Proxy(Usuario usuario)
         {
             this.user = usuario;
         }
-       public void Login()
+       public void Login(string usr, string psw)
         {
-            Console.WriteLine("Ingrese un usuario:");
-            string usr = Console.ReadLine();
-            Console.WriteLine("Ingrese su password:");
-            string psw = Console.ReadLine();
+            
             if (usr == user.User && psw == user.Pass)
             {
                 Console.WriteLine("Bienvenido " + usr);
-                user.Login();
+                user.Login(usr, psw);
             }
             else
             {

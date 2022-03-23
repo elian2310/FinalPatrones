@@ -6,7 +6,7 @@ namespace PFPatrones
 {
     interface IProxy
     {
-        void Login();
+        void Login(string usr, string pww);
        
 
     }

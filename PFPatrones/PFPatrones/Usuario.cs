@@ -19,10 +19,10 @@ namespace PFPatrones
         }
         
 
-        public void AddProducto()
+        public void AddProducto(string nprod, int cant)
         {
-            
-            Console.WriteLine("Añadiendo producto(s) a su carrito");   
+            carrito.Add(new Producto(nprod, cant));
+            Console.WriteLine(nprod + " x" + cant.ToString() + " añadido al carrito");
         }
 
         public void GuardarCarrito()
@@ -30,9 +30,43 @@ namespace PFPatrones
             
         }
 
-        public void Login()
+        public void Login(string usr, string psw)
         {
-            
+            bool logout = false;
+            while (!logout)
+            {
+                Console.WriteLine("¿Que desea hacer?");
+                Console.WriteLine("1: Añadir producto al carrito | 2: Guardar Carrito | 3: Recuperar Carrito | 4: Vaciar Carrito | 5: Pagar Carrito | 6: Cerrar Sesión");
+                int selec = Convert.ToInt32(Console.ReadLine());
+                switch (selec)
+                {
+                    case 1:
+                        Console.WriteLine("Inserte el nombre del producto");
+                        string nprod = Console.ReadLine();
+                        Console.WriteLine("Inserte la cantidad");
+                        int cant = Convert.ToInt32(Console.ReadLine());
+                        AddProducto(nprod, cant);
+                        break;
+                    case 2:
+                        GuardarCarrito();
+                        break;
+                    case 3:
+                        ResetCarrito();
+                        break;
+                    case 4:
+                        ResetCarrito();
+                        break;
+                    case 5:
+                        PagarCarrito();
+                        break;
+                    case 6:
+                        Console.WriteLine("Adios " + User);
+                        logout = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         public void PagarCarrito()
