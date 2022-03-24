@@ -9,13 +9,14 @@ namespace PFPatrones
         public string User { get; set; }
         public string Pass { get; set; }
         public List<Producto> carrito { get; set; }
-        CareTaker saves;
+        public CareTaker saves;
 
         public Usuario(string usr, string psw)
         {
             User = usr;
             Pass = psw;
             carrito = new List<Producto>();
+            saves = new CareTaker();
         }
         
 
@@ -27,7 +28,13 @@ namespace PFPatrones
 
         public void GuardarCarrito()
         {
-            
+            List<Producto> copia = new List<Producto>();
+            foreach (Producto p in carrito)
+            {
+                copia.Add(new Producto(p.nombreProducto, p.cantidad));
+            }
+            saves.mementos.Add(new Memento(copia));
+            Console.WriteLine("Carrito Guardado!");
         }
 
         public void Login(string usr, string psw)
@@ -45,19 +52,29 @@ namespace PFPatrones
                         string nprod = Console.ReadLine();
                         Console.WriteLine("Inserte la cantidad");
                         int cant = Convert.ToInt32(Console.ReadLine());
+                        Console.ForegroundColor = ConsoleColor.Green;
                         AddProducto(nprod, cant);
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         break;
                     case 2:
+                        Console.ForegroundColor = ConsoleColor.Green;
                         GuardarCarrito();
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         break;
                     case 3:
-                        ResetCarrito();
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        RestoreCarrito(saves.mementos[^1]);
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         break;
                     case 4:
+                        Console.ForegroundColor = ConsoleColor.Green;
                         ResetCarrito();
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         break;
                     case 5:
+                        Console.ForegroundColor = ConsoleColor.Green;
                         PagarCarrito();
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         break;
                     case 6:
                         Console.WriteLine("Adios " + User);
@@ -71,19 +88,31 @@ namespace PFPatrones
 
         public void PagarCarrito()
         {
+            Console.WriteLine("Procesando pedidos");
+            int precio = 0;
+            foreach (Producto p in carrito)
+            {
+                Console.WriteLine(p.nombreProducto + " " + p.cantidad.ToString() + "x = " + p.CalcularPrecio().ToString() + " Bs.");
+                precio = precio + p.CalcularPrecio();
+            }
+            Console.WriteLine("TOTAL: " + precio.ToString() + " Bs.");
             Console.WriteLine("Carrito pagado satisfactoriamente");
         }
 
         public void ResetCarrito()
         {
-            
-
+            carrito.Clear();
+            Console.WriteLine("Carrito vaciado!");
         }
 
-        public void RestoreCarrito()
+        public void RestoreCarrito(Memento memento)
         {
-            
-            
+            carrito.Clear();
+            foreach (Producto p in memento.Carrito)
+            {
+                carrito.Add(p);
+            }
+            Console.WriteLine("Carrito restaurado!");
         }
     }
 }

@@ -6,6 +6,6 @@ namespace PFPatrones
 {
     class CareTaker
     {
-       private List<Memento> mementos = new List<Memento>();
+       public List<Memento> mementos = new List<Memento>();
     }
 }

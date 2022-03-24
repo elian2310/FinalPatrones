@@ -61,6 +61,7 @@ namespace PFPatrones
             electricos.Add(ind);
             while (true)
             {
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Escoja una opcion:");
                 Console.WriteLine("1: Hacer pedido | 2: Ver productos por categoria | 3: Ingresar como Cliente | 4: Registrar Cliente");
                 int selec = Convert.ToInt32(Console.ReadLine());
@@ -77,6 +78,7 @@ namespace PFPatrones
                         fachada.RealizarPedido(nprod, cant, nprov);
                         break;
                     case 2:
+                        Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine("MUEBLES");
                         foreach (int p in muebles)
                         {
@@ -107,6 +109,7 @@ namespace PFPatrones
                             ConcreteFlyweight fwprod = (ConcreteFlyweight)fabrica[p];
                             Console.WriteLine(fwprod.GetNombre() + " - " + fwprod.GetPrecio().ToString());
                         }
+                        Console.ForegroundColor = ConsoleColor.White;
                         break;
                     case 3:
                         Console.WriteLine("Ingrese su usuario:");
@@ -121,6 +124,7 @@ namespace PFPatrones
                             string inpcaptcha = Console.ReadLine();
                             if (inpcaptcha.Equals(captcha))
                             {
+                                Console.ForegroundColor = ConsoleColor.Yellow;
                                 usrprox.Login(usrnam,passw);
                             }
                             else
@@ -134,12 +138,15 @@ namespace PFPatrones
                         }
                         break;
                     case 4:
+                        
                         Console.WriteLine("Ingrese el nuevo usuario:");
                         string nusrnam = Console.ReadLine();
                         Console.WriteLine("Ingrese la nueva contraseña:");
                         string npassw = Console.ReadLine();
                         usuarios.Add(new Proxy(new Usuario(nusrnam, npassw)));
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Usuario registrado correctamente");
+                        Console.ForegroundColor = ConsoleColor.White;
                         break;
                     default:
                         break;

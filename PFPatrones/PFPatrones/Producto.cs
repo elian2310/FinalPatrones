@@ -6,8 +6,8 @@ namespace PFPatrones
 {
     class Producto
     {
-        string nombreProducto;
-        int cantidad;
+        public string nombreProducto;
+        public int cantidad;
 
         public Producto(string nombreProd, int cantidad)
         {
